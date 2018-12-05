@@ -1,0 +1,18 @@
+<h1>Edit Movie: <%= @movie.title %></h1>
+<div class="well">
+  <form action="/edit_movie/<%= @movie.id %>" method="post" autocomplete="off">
+    <input name="_method" type="hidden" value="patch">
+    <label for="title">What is the updated title?</label>
+    <input type="text" name="title" value="<%= @movie.title %>"><br>
+
+    <label for="genre">What is the updated genre?</label>
+    <input type="text" name="genre" value="<%= @movie.genre %>"><br>
+
+    <label for="actors">Who stars in the movie?</label>
+    <input type="text" name="actors" value="<%= @movie.actors %>"><br>
+
+    <button type="submit" name="button">Update</button>
+  </form>
+</div>
+
+<h5 class="return"><a href="/admin"> Return to Admin</a></h5>

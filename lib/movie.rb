@@ -24,20 +24,32 @@ class Movie
   movies
 end
 
+  def update(attributes)
+    @title = attributes.fetch(:title)
+    @actors = attributes.fetch(:actors)
+    @genre = attributes.fetch(:genre)
+    @id = self.id()
+    DB.exec("UPDATE movies SET title = '#{@title}' WHERE id = #{@id};")
+    DB.exec("UPDATE movies SET actors = '#{@actors}' WHERE id = #{@id};")
+    DB.exec("UPDATE movies SET genre = '#{@genre}' WHERE id = #{@id};")
+  end
 
   def self.find(id)
-   returned_movies = DB.exec("SELECT * FROM movies_tb WHERE id = #{id};")
+
+   returned_movies = DB.exec("SELECT * FROM movies WHERE id = #{id};")
+   return_movie = nil
    returned_movies.each() do |movie|
-     title = movies.fetch("title")
-     actors = movies.fetch("actors")
-     genre = movies.fetch("genre")
+     title = movie.fetch("title")
+     actors = movie.fetch("actors")
+     genre = movie.fetch("genre")
      checkedout = false
-     if(movies.fetch("checkedout") == "t")
+     if(movie.fetch("checkedout") == "t")
        checkedout = true
      end
-     id = movies.fetch("id").to_i()
-     return movies.push(Movie.new({:title => title, :actors => actors, :genre => genre, :checkedout => checkedout, :id => id}))
+     id = movie.fetch("id").to_i()
+     return_movie = Movie.new({:title => title, :actors => actors, :genre => genre, :checkedout => checkedout, :id => id})
     end
+    return_movie
   end
 
   def save

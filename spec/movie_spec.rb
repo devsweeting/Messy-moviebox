@@ -33,6 +33,15 @@ describe(Movie) do
       expect(movie1).to(eq(movie3))
     end
   end
+
+  describe("#update") do
+    it("lets you update a movie in the database") do
+        movie = Movie.new({:title => 'The Commuter', :actors => 'Liam Neeson', :genre=> 'Drama', :checkedout => false, :id => nil})
+      movie.save()
+      movie.update({:title => 'Taken', :actors => 'Liam Neeson', :genre=> 'Drama', :checkedout => false, :id => nil})
+      expect(movie.title()).to(eq("Taken"))
+    end
+  end
   #
   # describe(".all_ordered") do
   #   it("retrieves items from the database sorted according to the inputted field.") do
