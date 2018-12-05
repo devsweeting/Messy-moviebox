@@ -3,6 +3,7 @@ require('pg')
 require('movie')
 require('patron')
 require('rent')
+require('pry')
 
 DB = PG.connect({:dbname => "moviebox_test"})
 

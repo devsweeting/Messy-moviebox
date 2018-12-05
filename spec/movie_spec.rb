@@ -7,21 +7,21 @@ describe(Movie) do
     end
   end
 
-  describe("#movie_id") do
-    it("sets its ID when you save it") do
-      movie = Movie.new({:title => "The Commuter", :actors => "Liam Neeson", :genre=> 'Drama', :checkedout => false, :id => nil})
+  describe("#id") do
+    it ("sets its ID when you save it") do
+      movie = Movie.new({:title => 'The Commuter', :actors => 'Liam Neeson', :genre=> 'Drama', :checkedout => false, :id => nil})
       movie.save
       expect(movie.id()).to(be_an_instance_of(Integer))
     end
   end
 
-  # describe("#save") do
-  #   it("lets you save animals to the database") do
-  #     animal = Movie.new({:animal_id => nil, :animal_name => "Frank", :animal_gender => 'male', :admittance => '2017-03-16 00:00:00', :animal_type => 'dog', :animal_breed => 'bulldog', :owner_id => 0})
-  #     animal.save
-  #     expect(Movie.all()).to(eq([animal]))
-  #   end
-  # end
+  describe("#save") do
+    it("lets you save movies to the database") do
+        movie = Movie.new({:title => 'The Commuter', :actors => 'Liam Neeson', :genre=> 'Drama', :checkedout => false, :id => nil})
+        movie.save
+        expect(Movie.all()).to(eq([movie]))
+    end
+  end
   #
   # describe("#==") do
   #   it("is the same animal if it has the same values") do

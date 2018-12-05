@@ -2,7 +2,7 @@ class Movie
   attr_accessor(:title, :actors, :genre, :checkedout)
   attr_reader(:id)
 
-  def intialize(attributes)
+  def initialize(attributes)
     @title = attributes.fetch(:title)
     @actors = attributes.fetch(:actors)
     @genre = attributes.fetch(:genre)
@@ -10,20 +10,19 @@ class Movie
     @checkedout = false
   end
 
-  def self.all_basic(movies)
-    # output_movies = []
-    movies.each() do |movie|
-      title = movies.fetch("title")
-      actors = movies.fetch("actors")
-      genre = movies.fetch("genre")
-      checkedout = movies.fetch("checkedout")
-      id = movies.fetch("id").to_i()
-    temp_movie = Movie.new({:title => title, :actors => actors, :genre => genre, :checkedout => checkedout, :id => id})
-
   def self.all
     returned_movies = DB.exec("SELECT * FROM movies;")
-    Movie.all_basic(returned_movies, true)
+    movies = []
+    returned_movies.each() do |movie|
+      title = movie.fetch("title")
+      actors = movie.fetch("actors")
+      genre = movie.fetch("genre")
+      checkedout = movie.fetch("checkedout")
+      id = movie.fetch("id").to_i()
+      movies.push(Movie.new({:title => title, :actors => actors, :genre => genre, :checkedout => checkedout, :id => id}))
   end
+  movies
+end
 
 
   def self.find(id)
@@ -32,14 +31,17 @@ class Movie
      title = movies.fetch("title")
      actors = movies.fetch("actors")
      genre = movies.fetch("genre")
-     checkedout = movies.fetch("checkedout")
+     checkedout = false
+     if(movies.fetch("checkedout") == "t")
+       checkedout = true
+     end
      id = movies.fetch("id").to_i()
      return movies.push(Movie.new({:title => title, :actors => actors, :genre => genre, :checkedout => checkedout, :id => id}))
     end
   end
 
   def save
-   result = DB.exec("INSERT INTO movies(title, actors, genre, checkedout) VALUES ('#{@title}', '#{@actors}', '#{@genre}' #{checkedout}) RETURNING id;")
+   result = DB.exec("INSERT INTO movies(title, actors, genre, checkedout) VALUES ('#{@title}', '#{@actors}', '#{@genre}', #{@checkedout}) RETURNING id;")
    @id = result.first().fetch("id").to_i()
  end
 
