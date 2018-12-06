@@ -11,8 +11,14 @@
     <label for="actors">Who stars in the movie?</label>
     <input type="text" name="actors" value="<%= @movie.actors %>"><br>
 
-    <button type="submit" name="button">Update</button>
+    <button type="submit" name="button" class="btn btn-success">Update</button>
   </form>
 </div>
+
+<form action="/edit_movie/<%= @movie.id %>" method="post" autocomplete="off">
+  <input name="_method" type="hidden" value="delete">
+<button type="submit" class="btn btn-danger">Delete</button>
+<form>
+
 
 <h5 class="return"><a href="/admin"> Return to Admin</a></h5>

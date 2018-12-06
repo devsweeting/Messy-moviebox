@@ -42,6 +42,17 @@ describe(Movie) do
       expect(movie.title()).to(eq("Taken"))
     end
   end
+
+  describe("#delete") do
+    it("lets you delete a movie from the database") do
+      movie = Movie.new({:title => 'The Commuter', :actors => 'Liam Neeson', :genre=> 'Drama', :checkedout => false, :id => nil})
+      movie.save()
+      movie2 = Movie.new({:title => 'Taken', :actors => 'Liam Neeson', :genre=> 'Action', :checkedout => false, :id => nil})
+      movie2.save()
+      movie.delete()
+      expect(Movie.all()).to(eq([movie2]))
+    end
+  end
   #
   # describe(".all_ordered") do
   #   it("retrieves items from the database sorted according to the inputted field.") do

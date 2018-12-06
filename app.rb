@@ -50,3 +50,10 @@ patch ('/edit_movie/:id') do
   @movies = Movie.all
   erb (:admin)
 end
+
+delete ("/edit_movie/:id") do
+  @movie = Movie.find(params.fetch("id").to_i())
+  @movie.delete()
+  @movies = Movie.all()
+  redirect "/admin"
+end

@@ -1,14 +1,19 @@
 <h1>Movie Box Admin</h1>
 
 <h2>In Stock Movies:</h2>
+<div class="row">
 <% @movies.each do |movie| %>
+  <div class="col-md-3">
+
   <div class="well">
-    <p>Movie Title: <%= movie.title %></p>
-    <p>Actors: <%= movie.actors %></p>
-    <p>Genre:<%= movie.genre%></p>
+    <p><strong>Title:</strong> <%= movie.title %></p>
+    <p><strong>Actors:</strong> <%= movie.actors %></p>
+    <p><strong>Genre:</strong> <%= movie.genre%></p>
     <a href="/edit_movie/<%= movie.id %>"> edit </a>
   </div>
+</div>
 <% end %>
+</div>
 
 
 <h2>Checked Out Movies:</h2>
