@@ -12,6 +12,7 @@ get ('/') do
   erb :index
 end
 
+# ADMIN PORTAL
 get ('/admin') do
   @movies = Movie.all
   erb :admin
@@ -56,4 +57,24 @@ delete ("/edit_movie/:id") do
   @movie.delete()
   @movies = Movie.all()
   redirect "/admin"
+end
+
+# PATRON PORTAL
+
+get ('/patron') do
+  @movies = Movie.all
+  erb :patron
+end
+
+get ('/create_profile') do
+  erb :create_profile
+end
+
+post ('/log_in') do
+  name = params.fetch("name")
+  patron = Patron.new({:name => name, :id => nil})
+  @name = patron.name
+  @patron = Patron.all
+  binding.pry
+  erb :log_in
 end
