@@ -1,0 +1,17 @@
+<h1>Movie List:</h1>
+<% if @message %>
+  <p><%= @message %></p>
+<% end %>
+<div class="row">
+<% @movies.each do |movie| %>
+  <div class="col-md-3">
+
+  <div class="well">
+    <p><strong>Title:</strong> <%= movie.title %></p>
+    <p><strong>Actors:</strong> <%= movie.actors %></p>
+    <p><strong>Genre:</strong> <%= movie.genre%></p>
+    <a href="/rent/<%= movie.id %>"> rent </a>
+  </div>
+</div>
+<% end %>
+</div>

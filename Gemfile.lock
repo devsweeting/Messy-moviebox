@@ -83,6 +83,7 @@ DEPENDENCIES
   pg
   pivotal_git_scripts
   pry
+  rack
   rspec
   sinatra
   sinatra-contrib

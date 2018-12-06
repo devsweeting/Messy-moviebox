@@ -38,4 +38,13 @@ class Patron
      self.name().==(another_patron.name())
    end
 
-  end
+   def self.authenticate?(name)
+     patrons = Patron.all
+     patrons.each do |patron|
+       if patron.name == name
+         return true
+       end
+     end
+     return false
+   end
+ end
